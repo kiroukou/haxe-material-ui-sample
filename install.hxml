@@ -1,0 +1,6 @@
+# From haxelib
+haxelib install classnames 0.1.5
+haxelib install react-next 1.103.0
+haxelib git material-ui https://gitlab.com/k-labz/haxe-oss/haxe-material-ui.git
+haxelib git react-types https://gitlab.com/k-labz/haxe-oss/haxe-react-types.git
+

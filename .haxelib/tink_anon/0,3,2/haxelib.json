@@ -1,0 +1,21 @@
+{
+	"name": "tink_anon",
+	"license": "MIT",
+	"tags": [
+		"tink",
+		"anonymous",
+		"cross",
+		"merge",
+		"splat"
+	],
+	"classPath": "src",
+	"contributors": [
+		"back2dos"
+	],
+	"releasenote": "Add helper to grab existent fields in typed manner. Allow merging private fields if visible.",
+	"version": "0.3.2",
+	"url": "https://github.com/haxetink/tink_anon/",
+	"dependencies": {
+		"tink_macro": ""
+	}
+}

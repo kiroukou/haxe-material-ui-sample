@@ -1,0 +1,11 @@
+-js .build/test.js
+-main test.ClassNamesTests
+
+-cp src
+-cp test/src
+-lib buddy
+
+-D nodejs
+-D buddy-colors
+
+-D classnames_fast_infos
