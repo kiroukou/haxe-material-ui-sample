@@ -1,5 +1,5 @@
 -lib react-next:1.118.1
--lib material-ui:0.14.7
+-lib material-ui:git:git@github.com:kLabz/haxe-material-ui.git#update/4.4.3
 
 # React-next dependencies
 # See also tink libs below

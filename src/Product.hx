@@ -1,11 +1,7 @@
 package;
 
-import MyTheme.CGColors;
 import mui.core.styles.Classes;
 import mui.core.styles.Styles;
-import react.ReactComponent;
-import react.ReactMacro.jsx;
-
 import mui.core.Card;
 import mui.core.Button;
 import mui.core.CardMedia;
@@ -14,6 +10,9 @@ import mui.core.CardActionArea;
 import mui.core.CardActions;
 import mui.core.Typography;
 import mui.core.Avatar;
+import mui.icon.LocalShipping;
+import react.ReactComponent;
+import react.ReactMacro.jsx;
 
 private typedef Props = {
 	var classes:TClasses;
@@ -34,22 +33,22 @@ private typedef TClasses = Classes<[
 	cagProductInfo,
 	cagProductPriceRate,
 	cagProductLabel,
+	cagLabelRouge,
+	cagBio,
 ]>
 
 @:noPublicProps
 @:wrap(Styles.withStyles(styles))
 class Product extends ReactComponentOfProps<Props> {
-	//https://cssinjs.org/jss-expand-full?v=v5.3.0
-	//https://cssinjs.org/jss-expand-full/?v=v5.3.0#supported-properties
 	public static function styles(theme:MyTheme):ClassesDef<TClasses> {
 		return Styles.jss({
-			button:{
+			button: {
 				size: "small",
 				textTransform: None,
-				color: '#84BD55',
+				color: theme.palette.secondary.main
 			},
 			card: {
-				backgroundColor: '#F8F4E5',
+				backgroundColor: theme.palette.cagette.bg2
 			},
 			media: {
 				height: 170,
@@ -65,15 +64,15 @@ class Product extends ReactComponentOfProps<Props> {
 			starProduct: {
 				width: 30,
 				height: 30,
-				color: '#F9D800',
-				backgroundColor: '#ffffff',
+				color: '#F9D800', // TODO: palette
+				backgroundColor: theme.palette.common.white,
 				marginLeft: "auto",
 				fontSize: 16,
 			},
 			farmerAvatar: {
-				color: '#404040',
-				backgroundColor: '#ededed',
-				border: "3 solid #ffffff",
+				color: theme.palette.grey._800,
+				backgroundColor: theme.palette.grey._200,
+				border: '3 solid ${theme.palette.common.white}',
 				width: 70,
 				height: 70,
 				marginLeft: "auto",
@@ -94,44 +93,41 @@ class Product extends ReactComponentOfProps<Props> {
 				maxHeight: 40,
 				overflow: Hidden,
 			},
-
-			cagProductLabel : {
-				marginLeft : -3,
-				"& .labelChip:hover" : {
-					backgroundColor: CGColors.White,
-				},
-				"& .labelChip" : {
-					fontSize: "0.7rem",
-					margin: "5px 2px",
-					padding: "0 5px",
-				},
+			cagProductLabel: {
+				marginLeft: -3,
 			},
 			cagProductDesc: {
 				fontSize: '0.9rem',
-				color : CGColors.Secondfont,
+				color: theme.palette.grey._800,
 				marginBottom : 0,
 				maxHeight: 65,
 				overflow: Hidden,
 			},
-			cagProductInfoWrap : {
+			cagProductInfoWrap: {
 				justifyContent: SpaceBetween,
 				padding: "0 10px",
 			},
-			cagProductInfo : {
-				fontSize : "1.3rem",
+			cagProductInfo: {
+				fontSize: "1.3rem",
 				"& .cagProductUnit" : {
 					marginRight: "2rem",
 				},
 				"& .cagProductPrice" : {
-					color : CGColors.Third,
+					color: theme.palette.cagette.third,
 				},
 			},
-			cagProductPriceRate : {
+			cagProductPriceRate: {
 				fontSize: "0.75rem",
-				color : CGColors.Secondfont,
-				marginTop : -5,
+				color: theme.palette.grey._600,
+				marginTop: -5,
 				marginLeft: 5,
 			},
+			cagLabelRouge: {
+				color: theme.palette.cagette.labelRouge
+			},
+			cagBio: {
+				color: theme.palette.cagette.bio
+			}
 		});
 	}
 
@@ -148,7 +144,7 @@ class Product extends ReactComponentOfProps<Props> {
 					>
 						<div className={classes.cagAvatarContainer}>
 							<Avatar className={classes.starProduct}>
-								<i className="icon icon-truck-solid"></i>
+								<LocalShipping />
 							</Avatar>
 						</div>
 
@@ -166,8 +162,17 @@ class Product extends ReactComponentOfProps<Props> {
 							La Ferme
 						</Typography>
 						<Typography component="p" className={classes.cagProductLabel}>
-							<SubCateg label="Label rouge" icon="icon icon-truck-solid" colorClass="cagLabelRouge" />
-							<SubCateg label="Bio" icon="icon icon-truck-solid" colorClass="cagBio"  />
+							<SubCateg
+								label="Label rouge"
+								icon={<LocalShipping fontSize={Small} />}
+								className={classes.cagLabelRouge}
+							/>
+
+							<SubCateg
+								label="Bio"
+								icon={<LocalShipping fontSize={Small} />}
+								className={classes.cagBio}
+							/>
 						</Typography>
 					</CardContent>
 				</CardActionArea>
@@ -183,8 +188,9 @@ class Product extends ReactComponentOfProps<Props> {
 						variant={Contained}
 						color={Primary}
 						className={classes.productBuy}
-						disableRipple>
-						<i className="icon icon-truck-solid"></i>
+						disableRipple
+					>
+						<LocalShipping fontSize={Small} />
 					</Button>
 				</CardActions>
 				<CardActions className={classes.cagProductInfoWrap} style={{ marginBottom: 10}}>

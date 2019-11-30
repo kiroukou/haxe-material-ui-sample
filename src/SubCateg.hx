@@ -1,8 +1,7 @@
 // it's just easier with this lib
 import classnames.ClassNames.fastNull as classNames;
 
-import MyTheme.CGColors;
-import css.Properties;
+import mui.core.Chip;
 import mui.core.styles.Classes;
 import mui.core.styles.Styles;
 import react.ReactComponent;
@@ -14,10 +13,10 @@ private typedef Props = {
 }
 
 private typedef PublicProps = {
-	?label:String,
-	?onclick:Void->Void,
-	?colorClass:String,
-	?icon: String,
+	?label:ReactFragment,
+	?icon:ReactFragment,
+	?onClick:Void->Void,
+	?className:String,
 }
 
 private typedef TClasses = Classes<[
@@ -28,53 +27,33 @@ private typedef TClasses = Classes<[
 @:publicProps(PublicProps)
 @:wrap(Styles.withStyles(styles))
 class SubCateg extends ReactComponentOfProps<Props> {
-
 	public static function styles(theme:MyTheme):ClassesDef<TClasses> {
 		return Styles.jss({
-			labelShip : {
-				backgroundColor: CGColors.White,
-				fontSize: "0.95rem",
-				margin: "10 8",
-				padding: "5 10",
-				borderRadius: 16,
-				textDecoration: "none",
-				display: "inline-block",
+			labelShip: {
+				backgroundColor: theme.palette.common.white,
 
-				transition: "all 0.5s ease",
-
-				"&::hover" : {
-					backgroundColor: "#FFFFFF",//untyped color('#FFFFF').darken(10).hex(),
-				},
-
-				"&.cagSelect" : {
-					color:'#E56403',
-				},
-
-				"&.cagLabelRouge" : {
-					color:'#E53909',
-				},
-
-				"&.cagBio" : {
-					color:'#16993B',
-				},
+				"& > svg": {
+					color: "currentColor"
+				}
 			}
 		});
 	}
 
 	override function render() {
-		var linkClasses = classNames({
+		var classes = classNames({
 			'${props.classes.labelShip}': true,
-			'${props.colorClass}': true,
-		});
-
-		var iconClasses = classNames({
-			'${props.icon}' : true,
+			'${props.className}': true
 		});
 
 		return jsx(
-			<a onClick={props.onclick} className={linkClasses}>
-				<i className={iconClasses}></i> {props.label}
-			</a>
+			<Chip
+				size={Small}
+				icon={props.icon}
+				label={props.label}
+				onClick={props.onClick}
+				clickable={props.onClick != null}
+				className={classes}
+			/>
 		);
 	}
 }
