@@ -7,7 +7,6 @@ typedef MyTheme = Theme<
 	MuiPaletteAction,
 	MuiPaletteCommon,
 	MuiPaletteBackground,
-	MuiPaletteGrey,
 	MuiPaletteText,
 	ColorPalette,
 	MuiProps,
