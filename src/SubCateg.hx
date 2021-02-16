@@ -1,15 +1,11 @@
-
 // it's just easier with this lib
 import classnames.ClassNames.fastNull as classNames;
-import MyTheme.CGColors;
+
+import mui.core.Chip;
 import mui.core.styles.Classes;
 import mui.core.styles.Styles;
 import react.ReactComponent;
 import react.ReactMacro.jsx;
-import react.types.*;
-import react.types.css.JustifyContent;
-import react.types.css.AlignContent;
-import react.types.css.Properties;
 
 private typedef Props = {
 	> PublicProps,
@@ -17,10 +13,10 @@ private typedef Props = {
 }
 
 private typedef PublicProps = {
-    ?label:String,
-    ?onclick:Void->Void,
-    ?colorClass:String,
-    ?icon: String,
+	?label:ReactFragment,
+	?icon:ReactFragment,
+	?onClick:Void->Void,
+	?className:String,
 }
 
 private typedef TClasses = Classes<[
@@ -31,55 +27,34 @@ private typedef TClasses = Classes<[
 @:publicProps(PublicProps)
 @:wrap(Styles.withStyles(styles))
 class SubCateg extends ReactComponentOfProps<Props> {
-    
-    public static function styles(theme:MyTheme):ClassesDef<TClasses> {
-		return {
-            labelShip : {
-                backgroundColor: CGColors.White,    
-                fontSize: "0.95rem",
-                margin: "10 8",
-                padding: "5 10",
-                borderRadius: 16,
-                textDecoration: "none",
-                display: "inline-block",
+	public static function styles(theme:MyTheme):ClassesDef<TClasses> {
+		return Styles.jss({
+			labelShip: {
+				backgroundColor: theme.palette.common.white,
 
-                transition: "all 0.5s ease",
-
-                "&::hover" : {
-                    backgroundColor: "#FFFFFF",//untyped color('#FFFFF').darken(10).hex(),
-                },       
-
-                "&.cagSelect" : {
-                    color:'#E56403',
-                },
-                
-                "&.cagLabelRouge" : {
-                    color:'#E53909',
-                },
-
-                "&.cagBio" : {
-                    color:'#16993B',
-                },
-            }
-		}
+				"& > svg": {
+					color: "currentColor"
+				}
+			}
+		});
 	}
 
-    override function render() {
-        var linkClasses = classNames({
+	override function render() {
+		var classes = classNames({
 			'${props.classes.labelShip}': true,
-			'${props.colorClass}': true,
+			'${props.className}': true
 		});
-        
-        var iconClasses = classNames({
-            '${props.icon}' : true,
-        });
 
-        var others = react.ReactMacro.getExtraProps(props);
-        return jsx('
-            <a onClick=${props.onclick} className=${linkClasses} {...others}>
-                <i className=${iconClasses}></i> ${props.label}
-            </a>
-        ');
-    }
+		return jsx(
+			<Chip
+				size={Small}
+				icon={props.icon}
+				label={props.label}
+				onClick={props.onClick}
+				clickable={props.onClick != null}
+				className={classes}
+			/>
+		);
+	}
 }
 

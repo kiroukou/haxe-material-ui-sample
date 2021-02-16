@@ -1,77 +1,68 @@
-
-// it's just easier with this lib
-import classnames.ClassNames.fastNull as classNames;
-import MyTheme.CGColors;
 import mui.core.styles.Classes;
 import mui.core.styles.Styles;
 import react.ReactComponent;
 import react.ReactMacro.jsx;
-import react.types.*;
-import react.types.css.JustifyContent;
-import react.types.css.AlignContent;
 
 private typedef Props = {
-	> PublicProps,
 	var classes:TClasses;
 }
 
-private typedef PublicProps = {
-}
-
 private typedef TClasses = Classes<[
-    quantityInput,
+	quantityInput,
 ]>
 
-@:acceptsMoreProps
-@:publicProps(PublicProps)
+@:noPublicProps
 @:wrap(Styles.withStyles(styles))
 class QuantityInput extends ReactComponentOfProps<Props> {
-    
-    public static function styles(theme:MyTheme):ClassesDef<TClasses> {
-		return {
-            quantityInput : {
-                border: '1px solid ${CGColors.Second}',
-                borderRadius: 3,
-                display: "flex",
-                maxWidth: 104,
-                "& div" : {
-                    flexGrow: 1,
-                },
-                "& .quantityMoreLess" : {
-                    backgroundColor : CGColors.Second,
-                    padding: 8,
-                    color : "#ffffff",
-                    fontSize: "2rem",
-                    lineHeight: "1rem",
-                    cursor: "pointer",
-                    textAlign: Center,
-                    transition: "all 0.5s ease",
-                    "&::hover" : {
-                        backgroundColor: "#a53fa1",//untyped color("#a53fa1").darken(10),            
-                    },
-                },
-                "& .quantity" : {
-                    fontSize: "1.2rem",
-                    lineHeight: "2rem",
-                    minWidth: 35,
-                    textAlign: Center,
-                    verticalAlign: "middle",
-                    color: CGColors.Second,
-                    backgroundColor: "#fff",
-                },
-            },
-		}
+	public static function styles(theme:MyTheme):ClassesDef<TClasses> {
+		return Styles.jss({
+			quantityInput: {
+				border: '1px solid ${theme.palette.cagette.second}',
+				borderRadius: 3,
+				display: "flex",
+				maxWidth: 104,
+
+				"& div": {
+					flexGrow: 1,
+				},
+
+				"& .quantityMoreLess": {
+					backgroundColor: theme.palette.cagette.second,
+					padding: 8,
+					color: theme.palette.common.white,
+					fontSize: "2rem",
+					lineHeight: "1rem",
+					cursor: "pointer",
+					textAlign: Center,
+					transition: "all 0.5s ease",
+
+					"&::hover": {
+						backgroundColor: theme.palette.cagette.second
+					},
+				},
+
+				"& .quantity": {
+					fontSize: "1.2rem",
+					lineHeight: "2rem",
+					minWidth: 35,
+					textAlign: Center,
+					verticalAlign: Middle,
+					color: theme.palette.cagette.second,
+					backgroundColor: theme.palette.common.white,
+				},
+			},
+		});
 	}
 
-    override function render() {
-        var classes = props.classes;
-        return jsx('
-            <div className=${classes.quantityInput}>
-                <div className="quantityMoreLess"> - </div>
-                <div className="quantity"> 1 </div>
-                <div className="quantityMoreLess"> + </div>
-            </div>
-        ');
-    }
-}
+	override function render() {
+		var classes = props.classes;
 
+		return jsx(
+			<div className=${classes.quantityInput}>
+				<div className="quantityMoreLess"> - </div>
+				<div className="quantity"> 1 </div>
+				<div className="quantityMoreLess"> + </div>
+			</div>
+		);
+	}
+}
