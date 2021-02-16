@@ -30,7 +30,7 @@ private typedef TClasses = Classes<[
 @:wrap(Styles.withStyles(styles))
 class MyComponent extends ReactComponentOfProps<Props> {
 	public static function styles(theme:MyTheme):ClassesDef<TClasses> {
-		return {
+		return Styles.jss({
 			root: {
 				padding: 4 * theme.spacing.unit,
 				background: theme.palette.background.dark,
@@ -38,13 +38,13 @@ class MyComponent extends ReactComponentOfProps<Props> {
 				"&::before": {
 					content: '"pseudo-element"',
 					display: "block",
-					position: "relative"
+					position: Relative
 				}
 			},
 			selected: {
 				fontSize: "300%"
 			}
-		};
+		});
 	}
 
 	override public function render() {
@@ -53,10 +53,10 @@ class MyComponent extends ReactComponentOfProps<Props> {
 			'${props.classes.selected}': props.selected
 		});
 
-		return jsx('
-			<$Button variant=${Outlined} className=${classes} fullWidth>
-				${props.children}
-			</$Button>
-		');
+		return jsx(
+			<Button variant={Outlined} className={classes} fullWidth>
+				{props.children}
+			</Button>
+		);
 	}
 }
